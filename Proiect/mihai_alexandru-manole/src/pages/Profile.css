@@ -1,0 +1,38 @@
+.profile {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile form {
+    margin-top: 20px;
+}
+
+.profile label {
+    display: block;
+    margin-bottom:
+            10px;
+}
+
+.profile input[type="text"],
+.profile input[type="email"] {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 250px;
+}
+
+.profile button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile button:hover {
+    background-color: #0056b3;
+}
