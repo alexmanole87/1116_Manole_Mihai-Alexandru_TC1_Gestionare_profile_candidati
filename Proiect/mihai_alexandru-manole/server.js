@@ -1,8 +1,10 @@
 import express from 'express';
+import bodyParser from 'body-parser'; // Import pentru analiza corpului cererii
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sequelize from './db.js';
 import Candidat from './candidati.js';
+import Aplicatie from './aplicatie.js'; //
 import multer from 'multer';
 
 const app = express();
@@ -11,11 +13,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(bodyParser.json()); // Utilizați bodyParser pentru a analiza JSON
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// Rute pentru Candidat
+app.get('/candidati', (req, res) => {
+    // Logica pentru a prelua toți candidații
 });
 
+app.post('/candidati', (req, res) => {
+    // Logica pentru a adăuga un nou candidat
+});
+
+// Rute pentru Aplicatie
+app.get('/aplicatii', (req, res) => {
+    // Logica pentru a prelua toate aplicațiile
+});
+
+app.post('/aplicatii', (req, res) => {
+    // Logica pentru a adăuga o nouă aplicație
+});
+
+// Configurația pentru multer (dacă este necesară gestionarea încărcării fișierelor)
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')
@@ -26,23 +44,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-// Configurați rutele pentru utilizatori
-app.get('/users', (req, res) => {
-    // Logica pentru a prelua utilizatori
-});
-
-app.post('/users', (req, res) => {
-    // Logica pentru a crea un utilizator
-});
-
-app.put('/users/:id', (req, res) => {
-    // Logica pentru a actualiza un utilizator
-});
-
-app.delete('/users/:id', (req, res) => {
-    // Logica pentru a șterge un utilizator
-});
 
 // Sincronizați baza de date și porniți serverul
 sequelize.sync()
