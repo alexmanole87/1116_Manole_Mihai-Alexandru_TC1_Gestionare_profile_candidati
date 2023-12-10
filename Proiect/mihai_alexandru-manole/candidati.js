@@ -1,29 +1,32 @@
-import Sequelize, {DataTypes} from 'sequelize';
-import sequelize from "./db.js";
+import { DataTypes } from 'sequelize';
+import sequelize from './db.js'; // Importare instanța sequelize
 
-
-//const Sequelize = require('sequelize');
-// const sequelize = require('db');
-
-const Candidat = sequelize.define('candidat', {
+const Candidat = sequelize.define('Candidat', {
+    // ID-ul unic pentru fiecare candidat
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    // Numele candidatului
     nume: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
+    // Prenumele candidatului
+    prenume: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    // Emailul candidatului
     email: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
+        allowNull: false,
         unique: true,
-        allowNull: false
-    },
-    parola: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    cv: {
-        type: DataTypes.STRING, // Calea către fișierul încărcat
-        allowNull: true // CV-ul poate fi opțional
+        validate: {
+            isEmail: true
+        }
     }
-
 });
 
 export default Candidat;
