@@ -14,7 +14,6 @@ const JobApplication = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Aici puteți adăuga logica pentru trimiterea aplicației
         console.log(application);
         alert('Aplicație trimisă!');
     };

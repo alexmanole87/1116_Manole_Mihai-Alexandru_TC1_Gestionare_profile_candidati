@@ -8,7 +8,7 @@ const SignUp = () => {
         email: '',
         parola: ''
     });
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -25,7 +25,7 @@ const SignUp = () => {
             users.push(userDetails);
             localStorage.setItem('users', JSON.stringify(users));
             alert('Înregistrare completă!');
-            history.push('/login');
+            navigate('/login');
         }
     };
 

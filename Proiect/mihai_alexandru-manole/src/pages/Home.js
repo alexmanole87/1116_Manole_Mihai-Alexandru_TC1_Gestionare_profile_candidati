@@ -7,6 +7,7 @@ const Home = () => {
             <h1>Bun venit la Aplicația noastră de Gestionare a Profilurilor Candidaților!</h1>
             <p>Explorați funcționalitățile noastre și începeți călătoria dvs. profesională cu noi.</p>
 
+
         </div>
     );
 };

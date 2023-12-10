@@ -1,21 +1,20 @@
-// AuthContext.js
 import React, { createContext, useState, useContext } from 'react';
 
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('loggedInUser')));
 
     const login = (userData) => {
         setUser(userData);
-        // aici puteți adăuga logica de login
+        localStorage.setItem('loggedInUser', JSON.stringify(userData));
     };
 
     const logout = () => {
         setUser(null);
-        // aici puteți adăuga logica de logout
+        localStorage.removeItem('loggedInUser');
     };
 
     return (
@@ -24,3 +23,4 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+

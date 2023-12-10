@@ -1,32 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './navbar.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Presupunând că AuthContext este în același director
 
 const Navbar = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/'); // Redirecționare către pagina principală după logout
+    };
+
     return (
         <nav className="navbar">
-            <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
-                   Proiect Tehnologii Web - Tema 5
-                </Link>
-                <ul className="nav-menu">
-                    <li className="nav-item">
-                        <Link to="/" className="nav-links">
-                            Acasă
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/profile" className="nav-links">
-                            Profil
-                        </Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/job-application" className="nav-links">
-                            Aplicații Job
-                        </Link>
-                    </li>
-                </ul>
-            </div>
+            <Link to="/">Acasă</Link>
+            {user ? (
+                <>
+                    <Link to="/profile">Profil</Link>
+                    <Link to="/job-application">Aplicații Job</Link>
+                    <button onClick={handleLogout}>Logout</button>
+                </>
+            ) : (
+                <>
+                    <Link to="/login">Login</Link>
+                </>
+            )}
         </nav>
     );
 };

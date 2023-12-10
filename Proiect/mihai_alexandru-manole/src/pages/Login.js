@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../components/AuthContext';
 import './Login.css';
-
 const Login = () => {
     const [credentials, setCredentials] = useState({
         email: '',
         parola: ''
     });
-    const history = useNavigate();
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -19,12 +20,16 @@ const Login = () => {
         const user = users.find(user => user.email === credentials.email && user.parola === credentials.parola);
 
         if (user) {
-            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            login(user); // Actualizați starea user în AuthContext
             alert('Autentificare reușită!');
-            history.push('/profile');
+            navigate('/profile'); // Redirecționare către pagina de profil
         } else {
             alert('Detalii de autentificare incorecte.');
         }
+    };
+
+    const handleSignUp = () => {
+        navigate('/signup'); // Redirecționare către pagina de signup
     };
 
     return (
@@ -51,6 +56,9 @@ const Login = () => {
                 </label>
                 <button type="submit">Autentifică-te</button>
             </form>
+            <button onClick={handleSignUp} className="signup-button">
+                Nu ai un cont? Înregistrează-te
+            </button>
         </div>
     );
 };
