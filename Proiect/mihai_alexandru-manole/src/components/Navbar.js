@@ -18,6 +18,8 @@ const Navbar = () => {
                 <>
                     <Link to="/profile">Profil</Link>
                     <Link to="/job-application">Aplicații Job</Link>
+                    <Link to="/candidateList">Lista Candidați</Link>
+                    <Link to="/addCandidate">Adaugă Candidat</Link>
                     <button onClick={handleLogout}>Logout</button>
                 </>
             ) : (
